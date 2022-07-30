@@ -1,0 +1,45 @@
+﻿@model OnlineTicketManagement.Models.Actor
+
+@{
+    ViewData["Title"]="Add Actors";
+}
+<div class="row">
+    <div class=" col-md-6 offset-md-2">
+        <form asp-action="Create">
+            <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+            <div class="form-group text-center">
+                <img id="ProfilePicturePreview" />
+</div>
+  <div class="form-group">
+    <label asp-for="ProfilePictureUrl"></label>
+    <input type="text" class="form-control" asp-for="ProfilePictureUrl" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <span class="text-danger" asp-validation-for="ProfilePictureUrl"></span>
+  </div>
+  <div class="form-group">
+    <label asp-for="FullName"></label>
+    <input type="text" class="form-control" asp-for="FullName" id="exampleInputPassword1">
+    <span class="text-danger" asp-validation-for="FullName"></span>
+  </div>
+    <div class="form-group">
+    <label asp-for="Bio"></label>
+    <input type="text" class="form-control" asp-for="Bio" id="exampleInputPassword1">
+    <span class="text-danger" asp-validation-for="Bio"></span>
+  </div>
+  <button type="submit" class="btn btn-outline-success" style="float:right;">Save</button>
+  <a class="btn btn-outline-info" asp-action="Index" asp-controller="Actor">Back</a>
+</form>
+
+    </div>
+
+</div>
+
+
+
+@section Scripts{
+    <script>
+        $("#ProfilePictureUrl").on("change", function () {
+            var output = document.getElementById('ProfilePicturePreview')
+            output.src = $(this).val();
+        })
+    </script>
+}

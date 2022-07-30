@@ -1,0 +1,39 @@
+﻿@model OnlineTicketManagement.Models.Cinema
+
+@{
+    ViewData["Title"]="Cinema Info";
+}
+<div class="row">
+    <div class=" col-md-6 offset-md-2">
+            <div class="form-group text-center">
+                <img id="ProfilePicturePreview" />
+            </div>
+  <div class="form-group">
+    <label asp-for="Logo"></label>
+    <input type="text" class="form-control" asp-for="Logo" id="exampleInputEmail1" aria-describedby="emailHelp" readonly>
+  </div>
+  <div class="form-group">
+    <label asp-for="Name"></label>
+    <input type="text" class="form-control" asp-for="Name" id="exampleInputPassword1" readonly>
+  </div>
+    <div class="form-group">
+    <label asp-for="Description"></label>
+    <input type="text" class="form-control" asp-for="Description" id="exampleInputPassword1" readonly>
+  </div>
+  <a class="btn btn-outline-success float-right" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+  <a class="btn btn-outline-info" asp-action="Index">Back</a>
+
+    </div>
+
+</div>
+
+
+
+@section Scripts{
+    <script>
+        $("#ProfilePictureUrl").on("change", function () {
+            var output = document.getElementById('ProfilePicturePreview')
+            output.src = $(this).val();
+        })
+    </script>
+}

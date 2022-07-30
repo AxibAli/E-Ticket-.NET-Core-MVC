@@ -1,0 +1,45 @@
+﻿@model OnlineTicketManagement.Models.Cinema
+
+@{
+    ViewData["Title"]="Edit Cinamas";
+}
+<div class="row">
+    <div class=" col-md-6 offset-md-2">
+        <form asp-action="Edit">
+            <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+            <div class="form-group text-center">
+                <img id="ProfilePicturePreview" />
+</div>
+  <div class="form-group">
+    <label asp-for="Logo"></label>
+    <input type="text" class="form-control" asp-for="Logo" id="exampleInputEmail1" aria-describedby="emailHelp">
+    <span class="text-danger" asp-validation-for="Logo"></span>
+  </div>
+  <div class="form-group">
+    <label asp-for="Name"></label>
+    <input type="text" class="form-control" asp-for="Name" id="exampleInputPassword1">
+    <span class="text-danger" asp-validation-for="Name"></span>
+  </div>
+    <div class="form-group">
+    <label asp-for="Description"></label>
+    <input type="text" class="form-control" asp-for="Description" id="exampleInputPassword1">
+    <span class="text-danger" asp-validation-for="Description"></span>
+  </div>
+  <button type="submit" class="btn btn-outline-success" style="float:right;">Update</button>
+  <a class="btn btn-outline-info" asp-action="Index" asp-controller="Actor">Back</a>
+</form>
+
+    </div>
+
+</div>
+
+
+
+@section Scripts{
+    <script>
+        $("#ProfilePictureUrl").on("change", function () {
+            var output = document.getElementById('ProfilePicturePreview')
+            output.src = $(this).val();
+        })
+    </script>
+}

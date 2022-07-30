@@ -1,0 +1,46 @@
+﻿@model IEnumerable<OnlineTicketManagement.Models.Movies>
+
+@{
+    ViewData["Title"] = "List of Movies";
+}
+
+<div class="row">
+    @foreach(var item in Model)
+    {
+     <div class="card" style="margin-right:50px; height:540px; width:300px;">
+        <div class="">
+          <img class="card-img-top" src="@item.ImageUrl" style="height:180px; max-width:540px;" alt="@item.Name">
+         <div class="card-body">
+          <h5 class="card-title">
+             @item.Name
+             <a class="float-right"><i class="bi bi-pencil-square"></i></a>
+          </h5>
+         </div>
+         <div>
+           <p class="card-text">@item.Description</p>
+           <p class="card-text"><b>Cinema :</b> @item.Cinema.Name</p>
+           <p class="card-text"><b>Category :</b> @item.MovieCategory</p>
+           <p class="card-text"><b>Start Date:</b> @item.StartDate.ToString("dd MMM yy")</p>
+           <p class="card-text"><b>End Date:</b> @item.EndDate.ToString("dd MMM yy")</p>
+           <p class="card-text"><b>Status</b>: 
+               @if(DateTime.Now >= item.StartDate && DateTime.Now <= item.EndDate )
+                        {
+                            <span class="badge bg-success text-white">RUNNING</span>
+                        }
+                        else if(DateTime.Now> item.EndDate)
+                        {
+                            <span class="badge bg-danger text-white">EXPIRE</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-primary text-white">UPCOMMING</span>
+                        }
+                    </p>
+           <a class="btn btn-success btn-sm float-right text-white"><i class="bi bi-cart2"></i> @item.Price.ToString("c")</a>
+           <a class="btn btn-primary btn-sm text-white" asp-action="Details" asp-route-id="@item.Id">Show Details</a>
+         </div>
+       </div>
+    </div>
+    }
+
+</div>

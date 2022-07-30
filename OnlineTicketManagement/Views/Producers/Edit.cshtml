@@ -1,0 +1,30 @@
+﻿@model OnlineTicketManagement.Models.Producer
+
+@{
+    ViewData["Title"] = "Editing Producers";
+}
+
+<div class="row">
+    <div class="col-md-6 offset-md-2">
+        <form asp-action="Edit">
+  <div class="form-group">
+    <label asp-for="ProfilePictureUrl"></label>
+    <input type="text" class="form-control" asp-for="ProfilePictureUrl" id="exampleInputEmail1" aria-describedby="emailHelp">
+  </div>
+  <div class="form-group">
+    <label asp-for="FullName"></label>
+    <input type="text" class="form-control" asp-for="FullName" id="exampleInputPassword1">
+  </div>
+    <div class="form-group">
+    <label asp-for="Bio"></label>
+    <input type="text" class="form-control" asp-for="Bio" id="exampleInputPassword1">
+  </div
+  <div class="form-group">
+   <button type="submit" class="btn btn-outline-success float-right">Save</button>
+   <a class="btn btn-outline-info" asp-action="Index">Back</a>
+   </div>
+  </form>
+
+    </div>
+
+</div>
