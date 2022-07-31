@@ -7,13 +7,13 @@
 <div class="row">
     @foreach(var item in Model)
     {
-     <div class="card" style="margin-right:50px; height:540px; width:300px;">
+     <div class="card" style="margin-right:50px; margin-bottom:30px; height:540px; width:300px;">
         <div class="">
           <img class="card-img-top" src="@item.ImageUrl" style="height:180px; max-width:540px;" alt="@item.Name">
          <div class="card-body">
           <h5 class="card-title">
              @item.Name
-             <a class="float-right"><i class="bi bi-pencil-square"></i></a>
+             <a class="float-right" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i></a>
           </h5>
          </div>
          <div>
@@ -44,3 +44,4 @@
     }
 
 </div>
+@await Html.PartialAsync("_AddNewButton","Movies");

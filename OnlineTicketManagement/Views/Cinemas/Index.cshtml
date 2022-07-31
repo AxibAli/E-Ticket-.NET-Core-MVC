@@ -29,6 +29,4 @@
         }
     </tbody>
 </table>
-<div style="position:fixed; right:35px; bottom:25px;">
-    <a class="btn btn-success text-white" asp-action="Create" ><i class="bi bi-plus-circle"></i> Add New </a>
-</div>
+@await Html.PartialAsync("_AddNewButton","Cinema");
