@@ -22,6 +22,17 @@ namespace OnlineTicketManagement.Controllers
             var data = services.GetAll(n=>n.Cinema);
             return View(data);
         }
+        public IActionResult Filter(string searchString)
+        {
+            var data = services.GetAll(n => n.Cinema);
+
+            if(!string.IsNullOrEmpty(searchString))
+            {
+                var filteredResult = data.Where(m => m.Name.Contains(searchString) || m.Description.Contains(searchString)).ToList();
+                return View("Index", filteredResult);
+            }
+            return View("Index", data);
+        }
         public IActionResult Details(int id)
         {
             var data = services.GetMovieById(id);
@@ -56,7 +67,7 @@ namespace OnlineTicketManagement.Controllers
         {
             var check = services.GetMovieById(id);
             if (check == null)
-                return View("NotFound", "Actor");
+                return View("NotFound");
 
             var response = new NewMoviesVM()
             {
