@@ -5,7 +5,7 @@ namespace OnlineTicketManagement.Data.Servies
 {
     public class CinemaServices : EntityBaseRepository<Cinema> , ICinemaServies
     {
-        public CinemaServices(TicketDbContext db):base(db)
+        public CinemaServices(TicketDbContext db): base(db)
         {
 
         }
