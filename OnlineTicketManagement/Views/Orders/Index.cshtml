@@ -1,0 +1,63 @@
+﻿@model OnlineTicketManagement.Data.ViewModel.ShoppingCartViewModel
+
+@{
+    ViewData["title"] = "Shopping Summary";
+}
+<div class="row">
+    <div class="col-md-8 offset-2">
+        <div class="text-center"><h2 >Your Shopping Summary</h2></div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Selected Amount</th>
+                    <th>Movie</th>
+                    <th>Price</th>
+                    <th>Sub Total</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var item in Model.ShoppingCart.ShoppingCartItems)
+                {
+                    <tr>
+                        <td class="align-middle">
+                            @item.Amount
+                        </td>
+                        <td class="align-middle">
+                            @item.Movies.Name
+                        </td>
+                        <td class="align-middle">
+                            @item.Movies.Price.ToString("c")
+                        </td>
+                        <td class="align-middle">@((item.Amount*item.Movies.Price).ToString("c"))</td>
+                        <td>
+                            <a class="text-danger" asp-action="RemoveItemsFromShoppingCart" asp-controller="Orders" asp-route-id="@item.Movies.Id">
+                                <i class="bi bi-cart-dash"></i>
+                            </a>
+                            <a class="text-success" asp-action="AddItemsInShoppingCart" asp-controller="Orders" asp-route-id="@item.Movies.Id">
+                                <i class="bi bi-cart-plus"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2"></td>
+                    <td><b>Total:</b></td>
+                    <td>
+                        @Model.ShoppingCartTotal.ToString("c")
+                    </td>
+                    <td></td>
+                </tr>
+            </tfoot>
+        </table>
+        <div class="text-center">
+            <div class="btn-group">
+                <a class="btn btn-outline-success" asp-controller="Movies" asp-action="Index">
+                    Add More Items
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

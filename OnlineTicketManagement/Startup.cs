@@ -1,11 +1,13 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OnlineTicketManagement.Data;
+using OnlineTicketManagement.Data.Cart;
 using OnlineTicketManagement.Data.Servies;
 using System;
 using System.Collections.Generic;
@@ -34,6 +36,9 @@ namespace OnlineTicketManagement
             services.AddScoped<IProducerServices, ProducerServices>();
             services.AddScoped<ICinemaServies, CinemaServices>();
             services.AddScoped<IMovieServices, MovieServices>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped(sc => ShoppingCart.GetShoppingCart(sc));
+            services.AddSession();
             services.AddControllersWithViews();
         }
 
@@ -54,6 +59,7 @@ namespace OnlineTicketManagement
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseSession();
 
             app.UseAuthorization();
 
