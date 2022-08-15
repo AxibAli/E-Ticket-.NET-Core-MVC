@@ -69,7 +69,7 @@
                         <a class="btn btn-primary btn-sm text-white" style="margin-top:60px;" asp-action="Index">Back To List</a>
                     </div>
                      <div class="col-md-4" style="margin-top:60px;">
-                        <a class="btn btn-success btn-sm float-right text-white"><i class="bi bi-cart2"></i> @Model.Price.ToString("c")</a>
+                        <a class="btn btn-success btn-sm float-right text-white" asp-controller="Orders" asp-action="AddToShoppingCart" asp-route-id="@Model.Id"><i class="bi bi-cart2"></i> @Model.Price.ToString("c")</a>
                     </div>
                 </div>
                 </div>

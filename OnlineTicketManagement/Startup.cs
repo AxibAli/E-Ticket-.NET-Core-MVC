@@ -36,6 +36,7 @@ namespace OnlineTicketManagement
             services.AddScoped<IProducerServices, ProducerServices>();
             services.AddScoped<ICinemaServies, CinemaServices>();
             services.AddScoped<IMovieServices, MovieServices>();
+            services.AddScoped<IOrderServices, OrderServices>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped(sc => ShoppingCart.GetShoppingCart(sc));
             services.AddSession();

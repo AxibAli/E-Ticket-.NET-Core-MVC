@@ -8,7 +8,7 @@
         <div class="text-center"><h2 >Your Shopping Summary</h2></div>
         <table>
             <thead>
-                <tr>
+                <tr class="text-center">
                     <th>Selected Amount</th>
                     <th>Movie</th>
                     <th>Price</th>
@@ -19,7 +19,7 @@
             <tbody>
                 @foreach(var item in Model.ShoppingCart.ShoppingCartItems)
                 {
-                    <tr>
+                    <tr class="text-center">
                         <td class="align-middle">
                             @item.Amount
                         </td>
@@ -31,10 +31,10 @@
                         </td>
                         <td class="align-middle">@((item.Amount*item.Movies.Price).ToString("c"))</td>
                         <td>
-                            <a class="text-danger" asp-action="RemoveItemsFromShoppingCart" asp-controller="Orders" asp-route-id="@item.Movies.Id">
+                            <a class="text-danger" asp-action="RemoveItemToShoppingCart" asp-controller="Orders" asp-route-id="@item.Movies.Id">
                                 <i class="bi bi-cart-dash"></i>
                             </a>
-                            <a class="text-success" asp-action="AddItemsInShoppingCart" asp-controller="Orders" asp-route-id="@item.Movies.Id">
+                            <a class="text-success" asp-action="AddToShoppingCart" asp-controller="Orders" asp-route-id="@item.Movies.Id">
                                 <i class="bi bi-cart-plus"></i>
                             </a>
                         </td>
@@ -54,6 +54,9 @@
         </table>
         <div class="text-center">
             <div class="btn-group">
+                <a class="btn btn-primary" asp-action="CompleteOrder">
+                    Complete Order
+                </a>
                 <a class="btn btn-outline-success" asp-controller="Movies" asp-action="Index">
                     Add More Items
                 </a>

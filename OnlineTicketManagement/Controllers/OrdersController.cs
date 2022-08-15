@@ -27,5 +27,25 @@ namespace OnlineTicketManagement.Controllers
 
             return View(response);
         }
+        public RedirectToActionResult AddToShoppingCart(int id)
+        {
+            var item = movieServices.GetMovieById(id);
+            if(item!= null)
+            {
+                shoppingCart.AddItemtoCart(item);
+
+            }
+            return RedirectToAction("Index");
+        }
+        public RedirectToActionResult RemoveItemToShoppingCart(int id)
+        {
+            var item = movieServices.GetMovieById(id);
+            if (item != null)
+            {
+                shoppingCart.RemoveItemtoCart(item);
+
+            }
+            return RedirectToAction("Index");
+        }
     }
 }
