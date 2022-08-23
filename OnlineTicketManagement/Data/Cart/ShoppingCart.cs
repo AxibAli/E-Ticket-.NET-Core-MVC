@@ -72,6 +72,12 @@ namespace OnlineTicketManagement.Data.Cart
             return items;
 
         }
+        public void ClearShoppingCart()
+        {
+            var items = _context.ShoppingCartItems.Where(n => n.ShoppingCartId == ShoppingCartId).ToList();
+            _context.ShoppingCartItems.RemoveRange(items);
+            _context.SaveChanges();
+        }
         
         
     }

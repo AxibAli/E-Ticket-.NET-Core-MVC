@@ -9,10 +9,18 @@ namespace OnlineTicketManagement.Controllers
     {
         private readonly IMovieServices movieServices;
         private readonly ShoppingCart shoppingCart;
-        public OrdersController(IMovieServices _movieServices, ShoppingCart _shoppingCart)
+        private readonly IOrderServices orderServices;
+        public OrdersController(IMovieServices _movieServices, ShoppingCart _shoppingCart, IOrderServices _orderServices)
         {
-            movieServices=_movieServices;
+            movieServices = _movieServices;
             shoppingCart = _shoppingCart;
+            orderServices = _orderServices;
+        }
+        public IActionResult ListOrder()
+        {
+            int userId = 0;
+            var orders = orderServices.GetOrdersByUserId(userId);
+            return View(orders);
         }
         public IActionResult Index()
         {
@@ -46,6 +54,15 @@ namespace OnlineTicketManagement.Controllers
 
             }
             return RedirectToAction("Index");
+        }
+        public IActionResult CompleteOrder()
+        {
+            var items = shoppingCart.GetShoppingCartItems();
+            int userId=0;
+            string userEmail = "";
+            orderServices.StoreOrder(items, userId, userEmail);
+            shoppingCart.ClearShoppingCart();
+            return View("OrdersCompleted");
         }
     }
 }

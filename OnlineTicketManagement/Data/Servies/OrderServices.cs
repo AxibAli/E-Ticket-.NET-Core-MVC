@@ -12,13 +12,13 @@ namespace OnlineTicketManagement.Data.Servies
         {
             db = _db;
         }
-        public List<Order> GetOrdersByUserId(string userId)
+        public List<Order> GetOrdersByUserId(int userId)
         {
             var orders = db.Orders.Include(n => n.OrderItems).ThenInclude(n => n.Movies).Where(a => a.UserId == userId).ToList();
             return orders;
         }
 
-        public void StoreOrder(List<ShoppingCartItems> items, string userId, string userEmail)
+        public void StoreOrder(List<ShoppingCartItems> items, int userId, string userEmail)
         {
             var orders = new Order()
             {
