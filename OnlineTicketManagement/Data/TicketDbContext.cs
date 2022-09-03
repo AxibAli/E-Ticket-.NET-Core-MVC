@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using OnlineTicketManagement.Models;
 
 namespace OnlineTicketManagement.Data
 {
-    public class TicketDbContext: DbContext
+    public class TicketDbContext: IdentityDbContext<ApplicationUser>
     {
         public TicketDbContext(DbContextOptions<TicketDbContext> options): base(options)
         {
@@ -12,6 +13,7 @@ namespace OnlineTicketManagement.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Actors_Movies>().HasKey(am => new
             {
                 am.MovieId,
