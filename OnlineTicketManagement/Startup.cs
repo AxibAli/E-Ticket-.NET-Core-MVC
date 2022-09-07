@@ -1,7 +1,9 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using OnlineTicketManagement.Data;
 using OnlineTicketManagement.Data.Cart;
 using OnlineTicketManagement.Data.Servies;
+using OnlineTicketManagement.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,7 +42,13 @@ namespace OnlineTicketManagement
             services.AddScoped<IOrderServices, OrderServices>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped(sc => ShoppingCart.GetShoppingCart(sc));
+            services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<TicketDbContext>();
+            services.AddMemoryCache();
             services.AddSession();
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            });
             services.AddControllersWithViews();
         }
 
@@ -62,6 +71,9 @@ namespace OnlineTicketManagement
             app.UseRouting();
             app.UseSession();
 
+            app.UseAuthentication();
+            app.UseAuthorization();
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -70,6 +82,7 @@ namespace OnlineTicketManagement
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+            AppDbInitializer.SeedUsersAndRolesAsync(app).Wait();
         }
     }
 }
