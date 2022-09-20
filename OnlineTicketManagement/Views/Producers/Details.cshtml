@@ -18,8 +18,11 @@
     <label asp-for="Bio"></label>
     <input type="text" class="form-control" asp-for="Bio" id="exampleInputPassword1" readonly>
   </div>
-  <a class="btn btn-outline-success float-right" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
-  <a class="btn btn-outline-info" asp-action="Index">Back</a>
+  @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+        {
+            <a class="btn btn-outline-success float-right" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+        }
+        <a class="btn btn-outline-info" asp-action="Index">Back</a>
 
     </div>
 
